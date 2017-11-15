@@ -1,0 +1,31 @@
+{
+  "command":"/home/ops/verdi/ops/product_delivery/deliver.sh",
+  "imported_worker_files": {
+    "/home/ops/.netrc": "/home/ops/.netrc",
+    "/home/ops/.aws": "/home/ops/.aws"
+  },
+  "recommended-queues": [ "zip-job_worker-small" ],
+  "disk_usage":"100GB",
+  "params" : [
+    {
+      "name": "product_name",
+      "destination": "positional"
+    },
+    { 
+      "name": "localize_url",
+      "destination": "positional"
+    },
+    {
+      "name": "path",
+      "destination": "positional"
+    },
+    {
+      "name": "sns_arn",
+      "destination": "positional"
+    },
+    {
+      "name": "aws_profile",
+      "destination": "positional"
+    }
+  ]
+}
