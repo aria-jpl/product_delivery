@@ -1,5 +1,7 @@
 {
   "label" : "Product Delivery",
+  "component":"tosca",
+  "submission_type":"individual",
   "params" : [
     { "name": "product_name",
       "from": "dataset_jpath:_id"
