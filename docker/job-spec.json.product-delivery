@@ -4,7 +4,7 @@
     "/home/ops/.netrc": "/home/ops/.netrc",
     "/home/ops/.aws": "/home/ops/.aws"
   },
-  "recommended-queues": [ "zip-job_worker-small" ],
+  "recommended-queues": [ "asf-job_worker-large" ],
   "disk_usage":"100GB",
   "params" : [
     {
