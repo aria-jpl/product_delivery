@@ -29,12 +29,13 @@ def putFile(merged_file, bucket_name, key_name):
     s3.upload_file(merged_file, bucket_name, key_name)
 
 if __name__ == '__main__':
-    try: status = merge(sys.argv[1], sys.argv[2], sys.argv[3])
-         key = sys.argv[3]
-         datasets_pos = key.find("/datasets")
-         bucket_pos = key.rfind('/', 0, datasets_pos)
-         bucket_name = key[bucket_pos+1:datasets_pos]
-         #putFile(sys.argv[3], bucket_name, key)
+    try: 
+        status = merge(sys.argv[1], sys.argv[2], sys.argv[3])
+        key = sys.argv[3]
+        datasets_pos = key.find("/datasets")
+        bucket_pos = key.rfind('/', 0, datasets_pos)
+        bucket_name = key[bucket_pos+1:datasets_pos]
+        putFile(sys.argv[3], bucket_name, key)
     except Exception as e:
         with open('_alt_error.txt', 'w') as f:
             f.write("%s\n" % str(e))
