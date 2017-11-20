@@ -13,7 +13,7 @@
     },
     { 
       "name": "localize_url",
-      "destination": "positional"
+      "destination": "localize"
     },
     {
       "name": "path",
