@@ -25,13 +25,14 @@ def merge(met_file, ds_file, merged_file):
 
 def putFile(merged_file, bucket_name, key_name):
     """Put merged metadata file on s3 bucket"""
+    key_name = key_name + merged_file
     s3 = boto3.client('s3')
     s3.upload_file(merged_file, bucket_name, key_name)
 
 if __name__ == '__main__':
     try: 
         status = merge(sys.argv[1], sys.argv[2], sys.argv[3])
-        key = sys.argv[3]
+        key = sys.argv[4]
         datasets_pos = key.find("/datasets")
         bucket_pos = key.rfind('/', 0, datasets_pos)
         bucket_name = key[bucket_pos+1:datasets_pos]

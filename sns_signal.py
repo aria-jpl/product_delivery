@@ -22,7 +22,7 @@ path = bucket_url[datasets_pos+1:]
 
 #get browse_path and metadata_path
 browse_path = path+'/'+BROWSE_IMAGE_NAME
-metadata_path = path+'/'+product_name+".dataset.json"
+metadata_path = path+'/'+product_name+"_delivery.dataset.json"
 
 s3 = boto3.client('s3')
 result = s3.list_objects(Bucket=bucket_name, Prefix= path)
