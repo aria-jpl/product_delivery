@@ -59,6 +59,8 @@ if __name__ == '__main__':
         datasets_pos = key.find("/datasets")
         bucket_pos = key.rfind('/', 0, datasets_pos)
         bucket_name = key[bucket_pos+1:datasets_pos]
+
+        key = key[datasets_pos+1:]
         putFile(merged_file, bucket_name, key)
     except Exception as e:
         with open('_alt_error.txt', 'w') as f:
