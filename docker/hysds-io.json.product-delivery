@@ -10,19 +10,19 @@
     },
     { 
       "name": "product_name",
-      "from": "dataset_jpath:_id",
+      "from": "dataset_jpath:_id[0]",
       "type": "text"
     },
     {
       "name": "s3_url",
       "from": "dataset_jpath:_source",
-      "lambda": "lambda ds: filter(lambda x: x.startswith('s3://'), ds['urls'])[0]",
+      "lambda": "lambda ds: filter(lambda x: x.startswith('s3://'), ds['urls'])[0][0]",
       "type": "text"
     },
     { 
       "name": "path",
       "from": "dataset_jpath:_source",
-      "lambda": "lambda ds: __import__('os').path.basename(filter(lambda x: x.startswith('s3://'), ds['urls'])[0])",
+      "lambda": "lambda ds: __import__('os').path.basename(filter(lambda x: x.startswith('s3://'), ds['urls'])[0])[0]",
       "type": "text"
     },
     { 
