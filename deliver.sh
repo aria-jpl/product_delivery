@@ -3,9 +3,9 @@ BASE_PATH=$(dirname "${BASH_SOURCE}")
 BASE_PATH=$(cd "${BASE_PATH}"; pwd)
 
 # get args
-PRODUCT_NAME="$1"
-S3_URL="$2"
-PROD_PATH="$3"
+PRODUCT_NAME="$1[0]"
+S3_URL="$2[0]"
+PROD_PATH="$3[0]"
 SNS_ARN="$4"
 AWS_PROFILE="$5"
 BROWSE_IMAGE_NAME="filt_topophase.unw.geo.browse_small.png"
