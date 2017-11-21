@@ -11,6 +11,13 @@ sns_arn = sys.argv[4]
 
 product_list = []
 BROWSE_IMAGE_NAME="filt_topophase.unw.geo.browse_small.png"
+
+if product_name.startswith('"'):
+    product_name = product_name.replace('"','')
+
+if bucket_url.startswith('"'):
+    bucket_url = bucket_url.replace('"','')
+
 #time stamp the message
 delivery_time = str(datetime.datetime.utcnow().isoformat()) 
 # get bucket

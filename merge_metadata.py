@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
         key = sys.argv[4]
         if key.startswith('"'):
-            key = key..replace('"','')
+            key = key.replace('"','')
  
         datasets_pos = key.find("/datasets")
         bucket_pos = key.rfind('/', 0, datasets_pos)
