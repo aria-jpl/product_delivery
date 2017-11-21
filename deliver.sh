@@ -123,5 +123,5 @@ if [ $STATUS -ne 0 ]; then
 fi
 
 # cleanup
-rm -rf ${PROD}
-rm -rf ${PROD}_delivery.dataset.json
+rm -rf ${PRODUCT_NAME}
+rm -rf ${PRODUCT_NAME}_delivery.dataset.json
