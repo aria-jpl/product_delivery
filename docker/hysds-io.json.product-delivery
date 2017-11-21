@@ -3,11 +3,17 @@
   "component":"tosca",
   "submission_type":"individual",
   "params" : [
-    { "name": "product_name",
-      "from": "dataset_jpath:_id"
-    },
     { 
       "name": "localize_url",
+      "from": "dataset_jpath:_source",
+      "lambda": "lambda ds: filter(lambda x: x.startswith('s3://'), ds['urls'])[0]"
+    },
+    { 
+      "name": "product_name",
+      "from": "dataset_jpath:_id"
+    },
+    {
+      "name": "s3_url",
       "from": "dataset_jpath:_source",
       "lambda": "lambda ds: filter(lambda x: x.startswith('s3://'), ds['urls'])[0]"
     },

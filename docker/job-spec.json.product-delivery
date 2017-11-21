@@ -8,12 +8,16 @@
   "disk_usage":"100GB",
   "params" : [
     {
+      "name": "localize_url",
+      "destination": "localize"
+    },
+    {
       "name": "product_name",
       "destination": "positional"
     },
-    { 
-      "name": "localize_url",
-      "destination": "localize"
+    {
+      "name": "s3_url",
+      "destination": "positional"
     },
     {
       "name": "path",

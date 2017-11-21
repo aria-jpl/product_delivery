@@ -4,9 +4,10 @@ BASE_PATH=$(cd "${BASE_PATH}"; pwd)
 
 # get args
 PRODUCT_NAME="$1"
-PROD_PATH="$2"
-SNS_ARN="$3"
-AWS_PROFILE="$4"
+S3_URL="$2"
+PROD_PATH="$3"
+SNS_ARN="$4"
+AWS_PROFILE="$5"
 BROWSE_IMAGE_NAME="filt_topophase.unw.geo.browse_small.png"
 
 # source environment
@@ -21,7 +22,7 @@ deliv="delivery-${dt}-${PROD}"
 echo "##########################################" 1>&2
 echo -n "Merge met and dataset file: " 1>&2
 date 1>&2
-${BASE_PATH}/merge_metadata.py ${PROD_PATH}/*.met.json ${PROD_PATH}/*.dataset.json ${PROD_PATH}.dataset.json ${PROD_PATH} 1>&2
+${BASE_PATH}/merge_metadata.py ${PROD_PATH[0]}/*.met.json ${PROD_PATH[0]}/*.dataset.json ${PROD_PATH[0]}.dataset.json ${S3_URL} 1>&2
 STATUS=$?
 echo -n "Finished merging met and dataset file: " 1>&2
 date 1>&2
@@ -99,7 +100,7 @@ fi
 echo "##########################################" 1>&2
 echo -n "Queueing delivery message to SNS: " 1>&2
 date 1>&2
-${BASE_PATH}/sns_signal.py ${PRODUCT_NAME} ${PROD_PATH} ${AWS_PROFILE} ${SNS_ARN}  1>&2
+${BASE_PATH}/sns_signal.py ${PRODUCT_NAME[0]} ${PROD_PATH[0]} ${AWS_PROFILE} ${SNS_ARN}  1>&2
 STATUS=$?
 echo -n "Finished queuing delivery message to SNS: " 1>&2
 date 1>&2
