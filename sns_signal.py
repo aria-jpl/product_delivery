@@ -37,9 +37,10 @@ for res in result['Contents']:
     key =  res["Key"]
     start_pos = key.rfind(product_name)
     product_start = key.find('/', start_pos)
-    print key[product_start+1:]
-    product_list.append(key[product_start+1:])
-
+    #iprint key[product_start+1:]
+    if key[product_start+1:].startswith(path)==False:
+        product_list.append(key[product_start+1:])
+        print key[product_start+1:]
 
 body = {
   "ProductName": product_name,
