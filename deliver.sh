@@ -112,7 +112,7 @@ fi
 echo "##########################################" 1>&2
 echo -n "Queueing delivery message to SNS: " 1>&2
 date 1>&2
-${BASE_PATH}/sns_signal.py ${PRODUCT_NAME} ${PROD_PATH} ${AWS_PROFILE} ${SNS_ARN}  1>&2
+${BASE_PATH}/sns_signal.py ${PRODUCT_NAME} ${S3_URL} ${AWS_PROFILE} ${SNS_ARN}  1>&2
 STATUS=$?
 echo -n "Finished queuing delivery message to SNS: " 1>&2
 date 1>&2
