@@ -123,4 +123,4 @@ if [ $STATUS -ne 0 ]; then
 fi
 
 # cleanup
-#rm -rf ${PROD} ${PROD}.zip
+rm -rf ${PROD}

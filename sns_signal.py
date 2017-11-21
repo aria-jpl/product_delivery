@@ -52,7 +52,11 @@ body = {
     "Bucket": bucket_name,
     "Key": metadata_path
    },  
-  "ProductFiles": product_list
+  "ProductFiles": {
+    "Keys": product_list,
+    "Bucket": bucket_name,
+    "Prefix": path 
+   }
 }
 
 
