@@ -124,3 +124,4 @@ fi
 
 # cleanup
 rm -rf ${PROD}
+rm -rf ${PROD}_delivery.dataset.json
