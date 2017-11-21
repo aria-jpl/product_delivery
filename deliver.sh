@@ -10,6 +10,10 @@ SNS_ARN="$4"
 AWS_PROFILE="$5"
 BROWSE_IMAGE_NAME="filt_topophase.unw.geo.browse_small.png"
 
+PRODUCT_NAME=${PRODUCT_NAME:1:${#PRODUCT_NAME}-2}
+S3_URL=${S3_URL:1:${#S3_URL}-2}
+PROD_PATH=${PROD_PATH:1:${#PROD_PATH}-2}
+
 # source environment
 source $HOME/verdi/bin/activate
 
