@@ -18,13 +18,11 @@
     },
     { 
       "name": "sns_arn",
-      "from": "submitter",
-      "type": "text"
+      "from": "submitter"
     },
     { 
       "name": "aws_profile",
-      "from": "submitter",
-      "type": "text"
+      "from": "submitter"
     }
   ]
 }
