@@ -31,7 +31,7 @@ def merge(met_file, ds_file, merged_file):
 
 def putFile(merged_file, bucket_name, key_name):
     """Put merged metadata file on s3 bucket"""
-    key_name = key_name + merged_file
+    key_name = key_name +'/'  + merged_file
     s3 = boto3.client('s3')
     s3.upload_file(merged_file, bucket_name, key_name)
 
