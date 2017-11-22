@@ -123,5 +123,8 @@ if [ $STATUS -ne 0 ]; then
 fi
 
 # cleanup
+if [[ $PRODUCT_NAME = \"* ]] ; then
+   PRODUCT_NAME=${PRODUCT_NAME:1:${#PRODUCT_NAME}-2}
+fi
 rm -rf ${PRODUCT_NAME}
 rm -rf ${PRODUCT_NAME}_delivery.dataset.json
