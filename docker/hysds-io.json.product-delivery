@@ -1,7 +1,7 @@
 {
   "label" : "Product Delivery",
   "component":"tosca",
-  "submission_type":"individual",
+  "submission_type":"iteration",
   "params" : [
     { 
       "name": "localize_url",
