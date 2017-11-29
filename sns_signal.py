@@ -8,6 +8,7 @@ product_name = sys.argv[1]
 bucket_url =  sys.argv[2]
 profile = sys.argv[3]
 sns_arn = sys.argv[4]
+purpose = sys.argv[5]
 
 product_list = []
 BROWSE_IMAGE_NAME="filt_topophase.unw.geo.browse_small.png"
@@ -24,6 +25,20 @@ path = bucket_url[datasets_pos+1:]
 browse_path = path+'/'+BROWSE_IMAGE_NAME
 metadata_path = path+'/'+product_name+".dataset.json"
 
+region = boto3.session.Session().region_name
+topic_arn = None
+
+sns = boto3.client('sns')
+topic_list = sns.list_topics()
+
+for topic in topic_list['Topics']:
+    if purpose == "test":
+        if topic['TopicArn'].endswith(":product-notification-test"):
+	    topic_arn = topic['TopicArn']
+    else:
+        if topic['TopicArn'].endswith(":product-notification"):
+            topic_arn = topic['TopicArn']	         
+
 s3 = boto3.client('s3')
 result = s3.list_objects(Bucket=bucket_name, Prefix= path)
 for res in result['Contents']:
@@ -35,6 +50,10 @@ for res in result['Contents']:
 
 
 body = {
+  "ResponseTopic": {
+    "Region": region,
+    "Arn": topic_arn
+    },
   "ProductName": product_name,
   "DeliveryTime": delivery_time,
   "Browse": {
