@@ -8,6 +8,7 @@ S3_URL="$2"
 PROD_PATH="$3"
 SNS_ARN="$4"
 AWS_PROFILE="$5"
+PURPOSE="$6"
 BROWSE_IMAGE_NAME="filt_topophase.unw.geo.browse_small.png"
 
 if [[ $PRODUCT_NAME = \[* ]] ; then
@@ -44,75 +45,10 @@ if [ $STATUS -ne 0 ]; then
   exit $STATUS
 fi
 
-#echo "##########################################" 1>&2
-#echo -n "Copying out browse image(${BROWSE_IMAGE_NAME}): " 1>&2
-#date 1>&2
-#cp ${PROD}/${BROWSE_IMAGE_NAME} ${BROWSE_IMAGE_NAME} 1>&2
-#STATUS=$?
-#echo -n "Finished copy of browse image: " 1>&2
-#date 1>&2
-#if [ $STATUS -ne 0 ]; then
-#  echo "Failed to copy browse image(${BROWSE_IMAGE_NAME})." 1>&2
-#  echo "{}"
-#  exit $STATUS
-#fi
-
-#echo "##########################################" 1>&2
-#echo -n "Zipping product: " 1>&2
-#date 1>&2
-#zip -r ${PROD}.zip $PROD 1>&2
-#STATUS=$?
-#echo -n "Finished zipping product: " 1>&2
-#date 1>&2
-#if [ $STATUS -ne 0 ]; then
-#  echo "Failed to zip product." 1>&2
-#  echo "{}"
-#  exit $STATUS
-#fi
-
-#echo "##########################################" 1>&2
-#echo -n "Delivering zipped product: " 1>&2
-#date 1>&2
-#aws --profile $AWS_PROFILE s3 cp ${PROD}.zip ${DEST_BUCKET}/${deliv}/${PROD}.zip 1>&2
-#STATUS=$?
-#echo -n "Finished delivering zipped product: " 1>&2
-#date 1>&2
-#if [ $STATUS -ne 0 ]; then
-#  echo "Failed to deliver zipped product." 1>&2
-#  echo "{}"
-#  exit $STATUS
-#fi
-
-#echo "##########################################" 1>&2
-#echo -n "Delivering zipped product metadata: " 1>&2
-#date 1>&2
-#aws --profile $AWS_PROFILE s3 cp ${PROD}.dataset.json ${DEST_BUCKET}/${deliv}/${deliv}.dataset.json 1>&2
-#STATUS=$?
-#echo -n "Finished delivering zipped product metadata: " 1>&2
-#date 1>&2
-#if [ $STATUS -ne 0 ]; then
-#  echo "Failed to deliver zipped product metadata." 1>&2
-#  echo "{}"
-#  exit $STATUS
-#fi
-
-#echo "##########################################" 1>&2
-#echo -n "Delivering browse image: " 1>&2
-#date 1>&2
-#aws --profile $AWS_PROFILE s3 cp ${BROWSE_IMAGE_NAME} ${DEST_BUCKET}/${deliv}/${BROWSE_IMAGE_NAME} 1>&2
-#STATUS=$?
-#echo -n "Finished delivering browse image: " 1>&2
-#date 1>&2
-#if [ $STATUS -ne 0 ]; then
-#  echo "Failed to deliver browse image." 1>&2
-#  echo "{}"
-#  exit $STATUS
-#fi
-
 echo "##########################################" 1>&2
 echo -n "Queueing delivery message to SNS: " 1>&2
 date 1>&2
-${BASE_PATH}/sns_signal.py ${PRODUCT_NAME} ${S3_URL} ${AWS_PROFILE} ${SNS_ARN}  1>&2
+${BASE_PATH}/sns_signal.py ${PRODUCT_NAME} ${S3_URL} ${AWS_PROFILE} ${SNS_ARN} ${PURPOSE} 1>&2
 STATUS=$?
 echo -n "Finished queuing delivery message to SNS: " 1>&2
 date 1>&2

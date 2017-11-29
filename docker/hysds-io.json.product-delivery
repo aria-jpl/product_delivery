@@ -34,6 +34,12 @@
       "name": "aws_profile",
       "from": "submitter",
       "type": "text"
+    },
+    {
+      "name": "purpose",
+      "from": "submitter",
+      "type": "enum",
+      "enumerables": ["ops","test"]
     }
   ]
 }
