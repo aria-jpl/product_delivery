@@ -52,14 +52,11 @@ for res in result['Contents']:
     key =  res["Key"]
     start_pos = key.rfind(product_name)
     product_start = key.find('/', start_pos)
-    #iprint key[product_start+1:]
     if key[product_start+1:].startswith(path)==False:
         product_list.append(key[product_start+1:])
-        print key[product_start+1:]
     else:
         new_start_pos = key[product_start+1:].find(product_name)
         new_prod_start = key.find('/', new_start_pos)
-        print key[new_prod_start+1:]
         product_list.append(key[new_prod_start+1:])
 
 body = {
@@ -84,6 +81,8 @@ body = {
    }
 }
 
+#printing out the sns message for log
+print json.dumps(body)
 
 session = boto3.session.Session(profile_name=profile)
 sns = session.client('sns')
