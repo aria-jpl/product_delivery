@@ -5,7 +5,7 @@
   "params" : [
     { 
       "name": "localize_url",
-      "from": "dataset_jpath:_source",
+      "from": "dataset_jpath:",
       "lambda": "lambda met: get_partial_products(met['_id'], get_best_url(met['_source']['urls']), [ met['_id']+'.met.json', met['_id']+'.dataset.json'])"
     },
     { 
