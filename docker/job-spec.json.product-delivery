@@ -4,15 +4,19 @@
     "/home/ops/.netrc": "/home/ops/.netrc",
     "/home/ops/.aws": "/home/ops/.aws"
   },
-  "recommended-queues": [ "zip-job_worker-small" ],
+  "recommended-queues": [ "asf-job_worker-large" ],
   "disk_usage":"100GB",
   "params" : [
+    {
+      "name": "localize_url",
+      "destination": "localize"
+    },
     {
       "name": "product_name",
       "destination": "positional"
     },
-    { 
-      "name": "localize_url",
+    {
+      "name": "s3_url",
       "destination": "positional"
     },
     {
@@ -25,6 +29,10 @@
     },
     {
       "name": "aws_profile",
+      "destination": "positional"
+    },
+    {
+      "name": "purpose",
       "destination": "positional"
     }
   ]

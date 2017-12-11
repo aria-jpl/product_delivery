@@ -1,28 +1,45 @@
 {
   "label" : "Product Delivery",
   "component":"tosca",
-  "submission_type":"individual",
+  "submission_type":"iteration",
   "params" : [
-    { "name": "product_name",
-      "from": "dataset_jpath:_id"
-    },
     { 
       "name": "localize_url",
+      "from": "dataset_jpath:",
+      "lambda": "lambda met: get_partial_products(met['_id'], get_best_url(met['_source']['urls']), [ met['_id']+'.met.json', met['_id']+'.dataset.json'])"
+    },
+    { 
+      "name": "product_name",
+      "from": "dataset_jpath:_id",
+      "type": "text"
+    },
+    {
+      "name": "s3_url",
       "from": "dataset_jpath:_source",
-      "lambda": "lambda ds: filter(lambda x: x.startswith('s3://'), ds['urls'])[0]"
+      "lambda": "lambda ds: filter(lambda x: x.startswith('s3://'), ds['urls'])[0]",
+      "type": "text"
     },
     { 
       "name": "path",
       "from": "dataset_jpath:_source",
-      "lambda": "lambda ds: __import__('os').path.basename(filter(lambda x: x.startswith('s3://'), ds['urls'])[0])"
+      "lambda": "lambda ds: __import__('os').path.basename(filter(lambda x: x.startswith('s3://'), ds['urls'])[0])",
+      "type": "text"
     },
     { 
       "name": "sns_arn",
-      "from": "submitter"
+      "from": "submitter",
+      "type": "text"
     },
     { 
       "name": "aws_profile",
-      "from": "submitter"
+      "from": "submitter",
+      "type": "text"
+    },
+    {
+      "name": "purpose",
+      "from": "submitter",
+      "type": "enum",
+      "enumerables": ["ops","test"]
     }
   ]
 }
