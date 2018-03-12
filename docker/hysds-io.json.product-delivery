@@ -30,11 +30,6 @@
       "from": "submitter",
       "type": "text"
     },
-    { 
-      "name": "aws_profile",
-      "from": "submitter",
-      "type": "text"
-    },
     {
       "name": "purpose",
       "from": "submitter",

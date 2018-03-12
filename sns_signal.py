@@ -6,9 +6,8 @@ import datetime
 # get args
 product_name = sys.argv[1]
 bucket_url =  sys.argv[2]
-profile = sys.argv[3]
-sns_arn = sys.argv[4]
-purpose = sys.argv[5]
+sns_arn = sys.argv[3]
+purpose = sys.argv[4]
 
 product_list = []
 BROWSE_IMAGE_NAME="filt_topophase.unw.geo.browse_small.png"
@@ -32,7 +31,7 @@ path = bucket_url[datasets_pos+1:]
 browse_path = path+'/'+BROWSE_IMAGE_NAME
 metadata_path = path+'/'+product_name+"_delivery.dataset.json"
 
-region = boto3.session.Session().region_name
+my_region = boto3.session.Session().region_name
 topic_arn = None
 
 sns = boto3.client('sns')
@@ -63,7 +62,7 @@ for res in result['Contents']:
 
 body = {
   "ResponseTopic": {
-    "Region": region,
+    "Region": my_region,
     "Arn": topic_arn
     },
   "ProductName": product_name,
@@ -86,6 +85,11 @@ body = {
 #printing out the sns message for log
 print json.dumps(body)
 
-session = boto3.session.Session(profile_name=profile)
-sns = session.client('sns')
+region_start_pos = sns_arn.find(':us-')
+region_end_pos = sns_arn.find(':',region_pos+1)
+
+region = sns_arn[region_pos+1:region_end_pos]
+
+session = boto3.session.Session()
+sns = session.client('sns', region_name = region)
 sns.publish(TopicArn=sns_arn, Message=json.dumps(body))
