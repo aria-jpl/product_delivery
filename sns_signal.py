@@ -1,7 +1,10 @@
 #!/usr/bin/env python
-import os, sys, json, boto3
+import os, sys, json, boto3, re
 from urlparse import urlparse
 import datetime
+
+S3_RE = re.compile(r's3://.+?/(.+?)/(.+)$')
+
 
 # get args
 product_name = sys.argv[1]
@@ -22,10 +25,11 @@ if bucket_url.startswith('"'):
 delivery_time = str(datetime.datetime.utcnow().isoformat()) 
 # get bucket
 #bucket = urlparse(bucket_url).netloc
-datasets_pos = bucket_url.find("/datasets")
-bucket_pos = bucket_url.rfind('/', 0, datasets_pos)
-bucket_name = bucket_url[bucket_pos+1:datasets_pos]
-path = bucket_url[datasets_pos+1:]
+#datasets_pos = bucket_url.find("/datasets")
+#bucket_pos = bucket_url.rfind('/', 0, datasets_pos)
+#bucket_name = bucket_url[bucket_pos+1:datasets_pos]
+#path = bucket_url[datasets_pos+1:]
+bucket_name, path = S3_RE.search(bucket_url).groups()
 
 #get browse_path and metadata_path
 browse_path = path+'/'+BROWSE_IMAGE_NAME
