@@ -90,9 +90,9 @@ body = {
 print json.dumps(body)
 
 region_start_pos = sns_arn.find(':us-')
-region_end_pos = sns_arn.find(':',region_pos+1)
+region_end_pos = sns_arn.find(':',region_start_pos+1)
 
-region = sns_arn[region_pos+1:region_end_pos]
+region = sns_arn[region_start_pos+1:region_end_pos]
 
 session = boto3.session.Session()
 sns = session.client('sns', region_name = region)
