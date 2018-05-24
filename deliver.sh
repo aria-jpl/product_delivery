@@ -7,8 +7,7 @@ PRODUCT_NAME="$1"
 S3_URL="$2"
 PROD_PATH="$3"
 SNS_ARN="$4"
-AWS_PROFILE="$5"
-PURPOSE="$6"
+PURPOSE="$5"
 BROWSE_IMAGE_NAME="filt_topophase.unw.geo.browse_small.png"
 
 if [[ $PRODUCT_NAME = \[* ]] ; then
@@ -48,7 +47,7 @@ fi
 echo "##########################################" 1>&2
 echo -n "Queueing delivery message to SNS: " 1>&2
 date 1>&2
-${BASE_PATH}/sns_signal.py ${PRODUCT_NAME} ${S3_URL} ${AWS_PROFILE} ${SNS_ARN} ${PURPOSE} 1>&2
+${BASE_PATH}/sns_signal.py ${PRODUCT_NAME} ${S3_URL} ${SNS_ARN} ${PURPOSE} 1>&2
 STATUS=$?
 echo -n "Finished queuing delivery message to SNS: " 1>&2
 date 1>&2

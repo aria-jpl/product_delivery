@@ -28,7 +28,7 @@
       "destination": "positional"
     },
     {
-      "name": "aws_profile",
+      "name": "purpose",
       "destination": "positional"
     },
     {

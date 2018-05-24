@@ -1,10 +1,13 @@
 #!/usr/bin/env python
-import os, sys, json, logging, traceback
+import os, sys, json, logging, traceback, re
 import boto3
 
 log_format = "[%(asctime)s: %(levelname)s/%(funcName)s] %(message)s"
 logging.basicConfig(format=log_format, level=logging.INFO)
 logger = logging.getLogger('merge_metadata')
+
+
+S3_RE = re.compile(r's3://.+?/(.+?)/(.+)$')
 
 
 def merge(met_file, ds_file, merged_file):
@@ -56,11 +59,12 @@ if __name__ == '__main__':
         if key.startswith('"'):
             key = key.replace('"','')
  
-        datasets_pos = key.find("/datasets")
-        bucket_pos = key.rfind('/', 0, datasets_pos)
-        bucket_name = key[bucket_pos+1:datasets_pos]
+        #datasets_pos = key.find("/datasets")
+        #bucket_pos = key.rfind('/', 0, datasets_pos)
+        #bucket_name = key[bucket_pos+1:datasets_pos]
 
-        key = key[datasets_pos+1:]
+        #key = key[datasets_pos+1:]
+        bucket_name, key = S3_RE.search(key).groups()
         putFile(merged_file, bucket_name, key)
     except Exception as e:
         with open('_alt_error.txt', 'w') as f:
