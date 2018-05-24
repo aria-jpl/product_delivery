@@ -9,8 +9,8 @@ S3_RE = re.compile(r's3://.+?/(.+?)/(.+)$')
 # get args
 product_name = sys.argv[1]
 bucket_url =  sys.argv[2]
-sns_arn = sys.argv[3]
-purpose = sys.argv[4]
+pub_sns_arn = sys.argv[3]
+callback_sns_arn = sys.argv[4]
 
 product_list = []
 BROWSE_IMAGE_NAME="filt_topophase.unw.geo.browse_small.png"
@@ -36,18 +36,6 @@ browse_path = path+'/'+BROWSE_IMAGE_NAME
 metadata_path = path+'/'+product_name+"_delivery.dataset.json"
 
 my_region = boto3.session.Session().region_name
-topic_arn = None
-
-sns = boto3.client('sns')
-topic_list = sns.list_topics()
-
-for topic in topic_list['Topics']:
-    if purpose == "test":
-        if topic['TopicArn'].endswith(":product-notification-test"):
-            topic_arn = topic['TopicArn']
-    else:
-        if topic['TopicArn'].endswith(":product-notification"):
-            topic_arn = topic['TopicArn']
 
 s3 = boto3.client('s3')
 result = s3.list_objects(Bucket=bucket_name, Prefix= path)
@@ -67,7 +55,7 @@ for res in result['Contents']:
 body = {
   "ResponseTopic": {
     "Region": my_region,
-    "Arn": topic_arn
+    "Arn": callback_sns_arn
     },
   "ProductName": product_name,
   "DeliveryTime": delivery_time,
@@ -89,11 +77,11 @@ body = {
 #printing out the sns message for log
 print json.dumps(body)
 
-region_start_pos = sns_arn.find(':us-')
-region_end_pos = sns_arn.find(':',region_start_pos+1)
+region_start_pos = pub_sns_arn.find(':us-')
+region_end_pos = pub_sns_arn.find(':',region_start_pos+1)
 
-region = sns_arn[region_start_pos+1:region_end_pos]
+region = pub_sns_arn[region_start_pos+1:region_end_pos]
 
 session = boto3.session.Session()
 sns = session.client('sns', region_name = region)
-sns.publish(TopicArn=sns_arn, Message=json.dumps(body))
+sns.publish(TopicArn=pub_sns_arn, Message=json.dumps(body))

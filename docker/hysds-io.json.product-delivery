@@ -26,15 +26,16 @@
       "type": "text"
     },
     { 
-      "name": "sns_arn",
+      "name": "pub_sns_arn",
       "from": "submitter",
+      "placeholder": "SNS ARN of dataset publisher (DAAC), e.g. ASF's SNS ARN",
       "type": "text"
     },
-    {
-      "name": "purpose",
+    { 
+      "name": "callback_sns_arn",
       "from": "submitter",
-      "type": "enum",
-      "enumerables": ["ops","test"]
+      "placeholder": "SNS ARN that dataset publisher will send confirmation to, e.g. JPL's SNS ARN",
+      "type": "text"
     }
   ]
 }

@@ -6,8 +6,8 @@ BASE_PATH=$(cd "${BASE_PATH}"; pwd)
 PRODUCT_NAME="$1"
 S3_URL="$2"
 PROD_PATH="$3"
-SNS_ARN="$4"
-PURPOSE="$5"
+PUB_SNS_ARN="$4"
+CALLBACK_SNS_ARN="$5"
 BROWSE_IMAGE_NAME="filt_topophase.unw.geo.browse_small.png"
 
 if [[ $PRODUCT_NAME = \[* ]] ; then
@@ -47,7 +47,7 @@ fi
 echo "##########################################" 1>&2
 echo -n "Queueing delivery message to SNS: " 1>&2
 date 1>&2
-${BASE_PATH}/sns_signal.py ${PRODUCT_NAME} ${S3_URL} ${SNS_ARN} ${PURPOSE} 1>&2
+${BASE_PATH}/sns_signal.py ${PRODUCT_NAME} ${S3_URL} ${PUB_SNS_ARN} ${CALLBACK_SNS_ARN} 1>&2
 STATUS=$?
 echo -n "Finished queuing delivery message to SNS: " 1>&2
 date 1>&2

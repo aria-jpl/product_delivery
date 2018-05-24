@@ -24,11 +24,11 @@
       "destination": "positional"
     },
     {
-      "name": "sns_arn",
+      "name": "pub_sns_arn",
       "destination": "positional"
     },
     {
-      "name": "purpose",
+      "name": "callback_sns_arn",
       "destination": "positional"
     }
   ]
