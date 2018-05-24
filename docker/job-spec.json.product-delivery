@@ -30,10 +30,6 @@
     {
       "name": "purpose",
       "destination": "positional"
-    },
-    {
-      "name": "purpose",
-      "destination": "positional"
     }
   ]
 }
