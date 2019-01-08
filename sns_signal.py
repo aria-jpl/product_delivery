@@ -30,7 +30,7 @@ delivery_time = str(datetime.datetime.utcnow().isoformat())
 #path = bucket_url[datasets_pos+1:]
 bucket_name, path = S3_RE.search(bucket_url).groups()
 
-#get browse_path and metadata_path
+#get browse_path, metadata_path, and product_path
 browse_path = path+'/'+BROWSE_IMAGE_NAME
 metadata_path = path+'/'+product_name+"_delivery.dataset.json"
 product_path = path+'/'+product_name+".nc"
