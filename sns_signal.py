@@ -12,7 +12,6 @@ bucket_url =  sys.argv[2]
 pub_sns_arn = sys.argv[3]
 callback_sns_arn = sys.argv[4]
 
-product_list = []
 BROWSE_IMAGE_NAME="filt_topophase.unw.geo.browse_small.png"
 
 if product_name.startswith('"'):
@@ -34,23 +33,9 @@ bucket_name, path = S3_RE.search(bucket_url).groups()
 #get browse_path and metadata_path
 browse_path = path+'/'+BROWSE_IMAGE_NAME
 metadata_path = path+'/'+product_name+"_delivery.dataset.json"
+product_path = path+'/'+product_name+".nc"
 
 my_region = boto3.session.Session().region_name
-
-s3 = boto3.client('s3')
-result = s3.list_objects(Bucket=bucket_name, Prefix= path)
-for res in result['Contents']:
-    key =  res["Key"]
-    start_pos = key.rfind(product_name)
-    product_start = key.find('/', start_pos)
-
-    if key.endswith("osaka.locked.json")==False:
-        if key[product_start+1:].startswith(path)==False:
-            product_list.append(key[product_start+1:])
-        else:
-            new_start_pos = key[product_start+1:].find(product_name)
-            new_prod_start = key.find('/', new_start_pos)
-            product_list.append(key[new_prod_start+1:])
 
 body = {
   "ResponseTopic": {
@@ -67,10 +52,9 @@ body = {
     "Bucket": bucket_name,
     "Key": metadata_path
    },  
-  "ProductFiles": {
-    "Keys": product_list,
+  "Product": {
     "Bucket": bucket_name,
-    "Prefix": path 
+    "Key": product_path
    }
 }
 
