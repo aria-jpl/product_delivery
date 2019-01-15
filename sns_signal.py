@@ -12,8 +12,6 @@ bucket_url =  sys.argv[2]
 pub_sns_arn = sys.argv[3]
 callback_sns_arn = sys.argv[4]
 
-BROWSE_IMAGE_NAME="filt_topophase.unw.geo.browse_small.png"
-
 if product_name.startswith('"'):
     product_name = product_name.replace('"','')
 
@@ -31,7 +29,7 @@ delivery_time = str(datetime.datetime.utcnow().isoformat())
 bucket_name, path = S3_RE.search(bucket_url).groups()
 
 #get browse_path, metadata_path, and product_path
-browse_path = path+'/'+BROWSE_IMAGE_NAME
+browse_path = path+'/'+product_name+".interferogram.browse_coarse.png"
 metadata_path = path+'/'+product_name+"_delivery.dataset.json"
 product_path = path+'/'+product_name+".nc"
 
