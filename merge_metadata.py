@@ -32,11 +32,13 @@ def merge(met_file, ds_file, merged_file):
     logger.info("merged: {}".format(json.dumps(ds, indent=2)))
     logger.info("written to: {}".format(merged_file))
 
+
 def putFile(merged_file, bucket_name, key_name):
     """Put merged metadata file on s3 bucket"""
-    key_name = key_name +'/'  + merged_file
+    key_name = key_name +'/'+ merged_file
     s3 = boto3.client('s3')
     s3.upload_file(merged_file, bucket_name, key_name)
+
 
 if __name__ == '__main__':
     try:
@@ -59,11 +61,6 @@ if __name__ == '__main__':
         if key.startswith('"'):
             key = key.replace('"','')
  
-        #datasets_pos = key.find("/datasets")
-        #bucket_pos = key.rfind('/', 0, datasets_pos)
-        #bucket_name = key[bucket_pos+1:datasets_pos]
-
-        #key = key[datasets_pos+1:]
         bucket_name, key = S3_RE.search(key).groups()
         putFile(merged_file, bucket_name, key)
     except Exception as e:

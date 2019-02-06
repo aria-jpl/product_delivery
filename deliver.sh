@@ -34,7 +34,7 @@ deliv="delivery-${dt}-${PROD}"
 echo "##########################################" 1>&2
 echo -n "Merge met and dataset file: " 1>&2
 date 1>&2
-${BASE_PATH}/merge_metadata.py ${PROD_PATH}/${PRODUCT_NAME}.met.json ${PROD_PATH}/${PRODUCT_NAME}.dataset.json ${PRODUCT_NAME}_delivery.dataset.json ${S3_URL} 1>&2
+${BASE_PATH}/merge_metadata.py ${PRODUCT_NAME}/${PRODUCT_NAME}.met.json ${PRODUCT_NAME}/${PRODUCT_NAME}.dataset.json ${PRODUCT_NAME}_delivery.dataset.json ${S3_URL} 1>&2
 STATUS=$?
 echo -n "Finished merging met and dataset file: " 1>&2
 date 1>&2
