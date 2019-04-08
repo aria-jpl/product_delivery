@@ -5,6 +5,7 @@ from hysds_commons.job_utils import submit_mozart_job
 QUEUE = "asf-job_worker-large"
 JOB_TYPE = "job-product-delivery"
 
+
 def submit_job(params, job_type, tag, rule, product_id):
     """
 
@@ -48,8 +49,8 @@ def submit_prod_deliv(product_name, s3_url, pub_sns, callback_sns, release_versi
     :return:
     """
     localize_url = list()
-    localize_url.append("met.json", product_name, s3_url)
-    localize_url.append("dataset.json", product_name, s3_url)
+    localize_url.append(get_localize_json("met.json", product_name, s3_url))
+    localize_url.append(get_localize_json("dataset.json", product_name, s3_url))
 
     params = [
         {
