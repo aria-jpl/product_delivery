@@ -36,7 +36,7 @@ def get_localize_json(file_extension, product_name, s3_url):
     return info
 
 
-def submit_prod_deliv(product_name, s3_url, pub_sns, callback_sns, release_version):
+def submit_prod_deliv(product_name, s3_url, pub_sns, callback_sns, release_version, list_name):
     """
     Submit product delivery job for a give product
     :param product_name:
@@ -44,6 +44,7 @@ def submit_prod_deliv(product_name, s3_url, pub_sns, callback_sns, release_versi
     :param pub_sns:
     :param callback_sns:
     :param release_version:
+    :param list_name:
     :return:
     """
     localize_url = list()
@@ -84,7 +85,7 @@ def submit_prod_deliv(product_name, s3_url, pub_sns, callback_sns, release_versi
     ]
 
     rule = {
-        "rule_name": "product-delivery_S1-GUNW-AOI_TRACK",
+        "rule_name": "product-delivery_{}".format(list_name),
         "queue": QUEUE,
         "priority": '5',
         "kwargs": '{}'
@@ -107,4 +108,4 @@ if __name__ == '__main__':
 
     for (prod_id, prod_url) in zip(product_ids, product_urls):
         submit_prod_deliv(product_name=prod_id, s3_url=prod_url, pub_sns=pub_sns_arn, callback_sns=callback_sns_arn,
-                          release_version=tag)
+                          release_version=tag, list_name=aoi_track_list_name)
