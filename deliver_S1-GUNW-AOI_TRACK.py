@@ -96,7 +96,7 @@ def submit_prod_deliv(product_name, s3_url, pub_sns, callback_sns, release_versi
 
 
 if __name__ == '__main__':
-    ctx = json.loads(open("_context.json", "r"))
+    ctx = json.loads(open("_context.json", "r").read())
     aoi_track_list_name = ctx.get("product_name")
     track_list_metadata = ctx.get("product_metadata")
     pub_sns_arn = ctx.get("pub_sns_arn")
