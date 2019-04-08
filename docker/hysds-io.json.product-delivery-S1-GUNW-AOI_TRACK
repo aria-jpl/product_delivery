@@ -1,0 +1,28 @@
+{
+  "label" : "Product Delivery of S1-GUNW-AOI_TRACK",
+  "component":"tosca",
+  "submission_type":"iteration",
+  "params" : [
+    {
+      "name": "product_name",
+      "from": "dataset_jpath:_id",
+      "type": "text"
+    },
+    {
+      "name": "product_metadata",
+      "from": "dataset_jpath:_source.metadata"
+    },
+    {
+      "name": "pub_sns_arn",
+      "from": "submitter",
+      "placeholder": "SNS ARN of dataset publisher (DAAC), e.g. ASF's SNS ARN",
+      "type": "text"
+    },
+    {
+      "name": "callback_sns_arn",
+      "from": "submitter",
+      "placeholder": "SNS ARN that dataset publisher will send confirmation to, e.g. JPL's SNS ARN",
+      "type": "text"
+    }
+  ]
+}
