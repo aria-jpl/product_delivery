@@ -1,5 +1,5 @@
 {
-  "command":"/home/ops/verdi/ops/product_delivery/deliver_S1-GUNW-AOI_TRACK.py",
+  "command":"python /home/ops/verdi/ops/product_delivery/deliver_S1-GUNW-AOI_TRACK.py",
   "imported_worker_files": {
     "/home/ops/.netrc": "/home/ops/.netrc",
     "/home/ops/.aws": "/home/ops/.aws"
