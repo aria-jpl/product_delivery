@@ -10,6 +10,7 @@ ARG gid
 COPY . /home/ops/verdi/ops/product_delivery
 RUN set -ex \
  && sudo chown -R ops:ops /home/ops/verdi/ops/product_delivery
+RUN sudo pip install elasticsearch
 
 # set entrypoint
 USER ops

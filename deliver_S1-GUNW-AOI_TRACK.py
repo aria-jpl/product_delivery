@@ -167,8 +167,8 @@ if __name__ == '__main__':
     product_urls = track_list_metadata.get("s1-gunw_urls")
 
     for (prod_id, prod_url) in zip(product_ids, product_urls):
-        # submit_prod_deliv(product_name=prod_id, s3_url=prod_url, pub_sns=pub_sns_arn, callback_sns=callback_sns_arn,
-        #                   release_version=tag, list_name=aoi_track_list_name)
-        # logging.info("ASF delivery message sent for {}".format(prod_id))
+        submit_prod_deliv(product_name=prod_id, s3_url=prod_url, pub_sns=pub_sns_arn, callback_sns=callback_sns_arn,
+                          release_version=tag, list_name=aoi_track_list_name)
+        logging.info("ASF delivery message sent for {}".format(prod_id))
         deliver_to_aria_products(prod_id)
 
