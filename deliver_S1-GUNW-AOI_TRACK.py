@@ -1,14 +1,6 @@
 import json
 import logging
 from hysds_commons.job_utils import submit_mozart_job
-import elasticsearch
-from hysds.celery import app
-
-ES_URL = app.conf.get("GRQ_ES_URL", "http://localhost:9200")
-ES = elasticsearch.Elasticsearch(ES_URL)
-CATALOG_INDEX = "grq_v2.0.1_s1-gunw"
-PUBLISH_INDEX = "{}-released".format(CATALOG_INDEX)
-DOC_TYPE = "S1-GUNW"
 
 QUEUE = "asf-job_worker-large"
 JOB_TYPE = "job-product-delivery"
@@ -20,34 +12,14 @@ logging.basicConfig(format=log_format, level=logging.INFO)
 
 class LogFilter(logging.Filter):
     def filter(self, record):
-        if not hasattr(record, 'id'): record.id = '--'
+        if not hasattr(record, 'id'):
+            record.id = '--'
         return True
 
 
 logger = logging.getLogger('ipf_scrape')
 logger.setLevel(logging.INFO)
 logger.addFilter(LogFilter())
-
-
-def add_doc_to_publish(prod_id, es_doc):
-    """
-    Add a half orbit to ES
-    :param hf_orbit_id:
-    :param es_doc:
-    :return: True if indexing was successful, else return False
-    """
-    result = ES.index(index=PUBLISH_INDEX, doc_type=DOC_TYPE, body=es_doc, id=prod_id)
-    if str(result["created"]) == "True":
-        return True
-    else:
-        return False
-
-
-def get_document(prod_id):
-    result = ES.get(index=CATALOG_INDEX, doc_type=DOC_TYPE, id=prod_id)
-    if result is not None:
-        return result.get('_source')
-    raise ValueError("Record not found for id {}".format(prod_id))
 
 
 def submit_job(params, job_type, tag, rule, product_id):
@@ -139,21 +111,6 @@ def submit_prod_deliv(product_name, s3_url, pub_sns, callback_sns, release_versi
     submit_job(params, job_type=JOB_TYPE, tag=release_version, rule=rule, product_id=product_name)
 
 
-def deliver_to_aria_products(prod_id):
-    """
-    Copy over document from Catalog index to Publish Index.
-    :param prod_id:
-    :param index:
-    :param type:
-    :return:
-    """
-    doc = get_document(prod_id)
-    if add_doc_to_publish(prod_id, doc) is True:
-        logging.info("{} delivered to aria-products.".format(prod_id))
-    else:
-        logging.info("{} FAILED to deliver to aria-products.")
-
-
 if __name__ == '__main__':
     ctx = json.loads(open("_context.json", "r").read())
     aoi_track_list_name = ctx.get("product_name")
@@ -170,5 +127,4 @@ if __name__ == '__main__':
         submit_prod_deliv(product_name=prod_id, s3_url=prod_url, pub_sns=pub_sns_arn, callback_sns=callback_sns_arn,
                           release_version=tag, list_name=aoi_track_list_name)
         logging.info("ASF delivery message sent for {}".format(prod_id))
-        deliver_to_aria_products(prod_id)
 

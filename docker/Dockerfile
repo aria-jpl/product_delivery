@@ -1,4 +1,4 @@
-FROM hysds/pge-base:latest
+FROM hysds/pge-base:python2
 
 MAINTAINER hysds-dev "hysds-dev@jpl.nasa.gov"
 LABEL description="Delivery of products"
@@ -10,7 +10,6 @@ ARG gid
 COPY . /home/ops/verdi/ops/product_delivery
 RUN set -ex \
  && sudo chown -R ops:ops /home/ops/verdi/ops/product_delivery
-RUN sudo pip install elasticsearch
 
 # set entrypoint
 USER ops
