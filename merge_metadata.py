@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from builtins import str
 import os, sys, json, logging, traceback, re
 import boto3
 

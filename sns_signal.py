@@ -1,6 +1,9 @@
 #!/usr/bin/env python
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
 import os, sys, json, boto3, re
-from urlparse import urlparse
+from urllib.parse import urlparse
 import datetime
 
 S3_RE = re.compile(r's3://.+?/(.+?)/(.+)$')
@@ -73,9 +76,6 @@ body = {
     "Prefix": path 
    }
 }
-
-#printing out the sns message for log
-print json.dumps(body)
 
 region_start_pos = pub_sns_arn.find(':us-')
 region_end_pos = pub_sns_arn.find(':',region_start_pos+1)
