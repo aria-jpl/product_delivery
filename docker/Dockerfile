@@ -1,4 +1,4 @@
-FROM hysds/pge-base:latest
+FROM hysds/pge-base:develop-es1
 
 MAINTAINER hysds-dev "hysds-dev@jpl.nasa.gov"
 LABEL description="Delivery of products"
