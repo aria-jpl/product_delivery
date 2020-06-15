@@ -1,11 +1,13 @@
 {
   "command":"python /home/ops/verdi/ops/product_delivery/deliver_S1-GUNW-AOI_TRACK.py",
   "imported_worker_files": {
-    "/home/ops/.netrc": "/home/ops/.netrc",
-    "/home/ops/.aws": "/home/ops/.aws"
+    "$HOME/.netrc": "/home/ops/.netrc",
+    "$HOME/.aws": "/home/ops/.aws"
   },
-  "recommended-queues": [ "asf-job_worker-large" ],
-  "disk_usage":"100GB",
+  "recommended-queues": [ "aria-job_worker-cnm_notify" ],
+  "soft_time_limit": 6000,
+  "time_limit": 6400,
+  "disk_usage": "100GB",
   "params" : [
     {
       "name": "product_name",
