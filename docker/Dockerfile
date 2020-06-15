@@ -1,4 +1,4 @@
-FROM hysds/pge-base:python2
+FROM hysds/isce2:latest-es1
 
 MAINTAINER hysds-dev "hysds-dev@jpl.nasa.gov"
 LABEL description="Delivery of products"
