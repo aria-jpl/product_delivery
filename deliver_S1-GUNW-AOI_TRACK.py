@@ -1,9 +1,10 @@
+from builtins import str
 import json
 import logging
 from hysds_commons.job_utils import submit_mozart_job
 
 QUEUE = "asf-job_worker-large"
-JOB_TYPE = "job-product-delivery-S1-GUNW-AOI_TRACK"
+JOB_TYPE = "job-product_delivery_asf-notify"
 DOC_TYPE = "S1-GUNW"
 
 log_format = "[%(asctime)s: %(levelname)s/%(funcName)s] %(message)s"
