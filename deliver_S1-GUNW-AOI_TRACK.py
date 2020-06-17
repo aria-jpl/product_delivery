@@ -3,7 +3,7 @@ import json
 import logging
 from hysds_commons.job_utils import submit_mozart_job
 
-QUEUE = "aria-job_worker-small"
+QUEUE = "factotum-job_worker-asf_throttled"
 JOB_TYPE = "job-product_delivery_asf-notify"
 DOC_TYPE = "S1-GUNW"
 

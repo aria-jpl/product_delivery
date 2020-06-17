@@ -4,7 +4,7 @@
     "$HOME/.netrc": "/home/ops/.netrc",
     "$HOME/.aws": "/home/ops/.aws"
   },
-  "recommended-queues": [ "aria-job_worker-cnm_notify" ],
+  "recommended-queues": [ "factotum-job_worker-small" ],
   "soft_time_limit": 6000,
   "time_limit": 6400,
   "disk_usage": "100GB",
